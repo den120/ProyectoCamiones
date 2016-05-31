@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PediProCreateDlg" widgetVar="PediProCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreatePediProTitle}">
+            <h:form id="PediProCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{pediProController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreatePediProLabel_pediProCodigo}" for="pediProCodigo" />
+                        <p:inputText id="pediProCodigo" value="#{pediProController.selected.pediProCodigo}" title="#{bundle.CreatePediProTitle_pediProCodigo}" required="true" requiredMessage="#{bundle.CreatePediProRequiredMessage_pediProCodigo}"/>
+                        <p:outputLabel value="#{bundle.CreatePediProLabel_peproCantidad}" for="peproCantidad" />
+                        <p:inputText id="peproCantidad" value="#{pediProController.selected.peproCantidad}" title="#{bundle.CreatePediProTitle_peproCantidad}" />
+                        <p:outputLabel value="#{bundle.CreatePediProLabel_preproPeso}" for="preproPeso" />
+                        <p:inputText id="preproPeso" value="#{pediProController.selected.preproPeso}" title="#{bundle.CreatePediProTitle_preproPeso}" />
+                        <p:outputLabel value="#{bundle.CreatePediProLabel_pedidoCodigo}" for="pedidoCodigo" />
+                        <p:selectOneMenu id="pedidoCodigo" value="#{pediProController.selected.pedidoCodigo}" required="true" requiredMessage="#{bundle.EditPediProRequiredMessage_pedidoCodigo}">
+                            <f:selectItems value="#{pedidoController.itemsAvailableSelectOne}"
+                                           var="pedidoCodigoItem"
+                                           itemValue="#{pedidoCodigoItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreatePediProLabel_productoCodigo}" for="productoCodigo" />
+                        <p:selectOneMenu id="productoCodigo" value="#{pediProController.selected.productoCodigo}" required="true" requiredMessage="#{bundle.EditPediProRequiredMessage_productoCodigo}">
+                            <f:selectItems value="#{productoController.itemsAvailableSelectOne}"
+                                           var="productoCodigoItem"
+                                           itemValue="#{productoCodigoItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{pediProController.create}" value="#{bundle.Save}" update="display,:PediProListForm:datalist,:growl" oncomplete="handleSubmit(args,'PediProCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PediProCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

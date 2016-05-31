@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PediProViewDlg" widgetVar="PediProViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewPediProTitle}">
+            <h:form id="PediProViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{pediProController.selected != null}">
+                        <h:outputText value="#{bundle.ViewPediProLabel_pediProCodigo}"/>
+                        <h:outputText value="#{pediProController.selected.pediProCodigo}" title="#{bundle.ViewPediProTitle_pediProCodigo}"/>
+                        <h:outputText value="#{bundle.ViewPediProLabel_peproCantidad}"/>
+                        <h:outputText value="#{pediProController.selected.peproCantidad}" title="#{bundle.ViewPediProTitle_peproCantidad}"/>
+                        <h:outputText value="#{bundle.ViewPediProLabel_preproPeso}"/>
+                        <h:outputText value="#{pediProController.selected.preproPeso}" title="#{bundle.ViewPediProTitle_preproPeso}"/>
+                        <h:outputText value="#{bundle.ViewPediProLabel_pedidoCodigo}"/>
+                        <h:outputText value="#{pediProController.selected.pedidoCodigo}" title="#{bundle.ViewPediProTitle_pedidoCodigo}"/>
+                        <h:outputText value="#{bundle.ViewPediProLabel_productoCodigo}"/>
+                        <h:outputText value="#{pediProController.selected.productoCodigo}" title="#{bundle.ViewPediProTitle_productoCodigo}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="PediProViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

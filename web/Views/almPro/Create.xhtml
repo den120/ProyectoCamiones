@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AlmProCreateDlg" widgetVar="AlmProCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateAlmProTitle}">
+            <h:form id="AlmProCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{almProController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateAlmProLabel_almProCodigo}" for="almProCodigo" />
+                        <p:inputText id="almProCodigo" value="#{almProController.selected.almProCodigo}" title="#{bundle.CreateAlmProTitle_almProCodigo}" required="true" requiredMessage="#{bundle.CreateAlmProRequiredMessage_almProCodigo}"/>
+                        <p:outputLabel value="#{bundle.CreateAlmProLabel_almProCantidad}" for="almProCantidad" />
+                        <p:inputText id="almProCantidad" value="#{almProController.selected.almProCantidad}" title="#{bundle.CreateAlmProTitle_almProCantidad}" />
+                        <p:outputLabel value="#{bundle.CreateAlmProLabel_productoCodigo}" for="productoCodigo" />
+                        <p:selectOneMenu id="productoCodigo" value="#{almProController.selected.productoCodigo}" required="true" requiredMessage="#{bundle.EditAlmProRequiredMessage_productoCodigo}">
+                            <f:selectItems value="#{productoController.itemsAvailableSelectOne}"
+                                           var="productoCodigoItem"
+                                           itemValue="#{productoCodigoItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateAlmProLabel_almacenCodigo}" for="almacenCodigo" />
+                        <p:selectOneMenu id="almacenCodigo" value="#{almProController.selected.almacenCodigo}" required="true" requiredMessage="#{bundle.EditAlmProRequiredMessage_almacenCodigo}">
+                            <f:selectItems value="#{almacenController.itemsAvailableSelectOne}"
+                                           var="almacenCodigoItem"
+                                           itemValue="#{almacenCodigoItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{almProController.create}" value="#{bundle.Save}" update="display,:AlmProListForm:datalist,:growl" oncomplete="handleSubmit(args,'AlmProCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="AlmProCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

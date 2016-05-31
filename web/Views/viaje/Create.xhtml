@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ViajeCreateDlg" widgetVar="ViajeCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateViajeTitle}">
+            <h:form id="ViajeCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{viajeController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateViajeLabel_viajeCodigo}" for="viajeCodigo" />
+                        <p:inputText id="viajeCodigo" value="#{viajeController.selected.viajeCodigo}" title="#{bundle.CreateViajeTitle_viajeCodigo}" required="true" requiredMessage="#{bundle.CreateViajeRequiredMessage_viajeCodigo}"/>
+                        <p:outputLabel value="#{bundle.CreateViajeLabel_viajeNumero}" for="viajeNumero" />
+                        <p:inputText id="viajeNumero" value="#{viajeController.selected.viajeNumero}" title="#{bundle.CreateViajeTitle_viajeNumero}" />
+                        <p:outputLabel value="#{bundle.CreateViajeLabel_viajeFecha}" for="viajeFecha" />
+                        <p:inputText id="viajeFecha" value="#{viajeController.selected.viajeFecha}" title="#{bundle.CreateViajeTitle_viajeFecha}" />
+                        <p:outputLabel value="#{bundle.CreateViajeLabel_viajeDireccion}" for="viajeDireccion" />
+                        <p:inputText id="viajeDireccion" value="#{viajeController.selected.viajeDireccion}" title="#{bundle.CreateViajeTitle_viajeDireccion}" />
+                        <p:outputLabel value="#{bundle.CreateViajeLabel_camionCodigo}" for="camionCodigo" />
+                        <p:selectOneMenu id="camionCodigo" value="#{viajeController.selected.camionCodigo}" >
+                            <f:selectItems value="#{camionController.itemsAvailableSelectOne}"
+                                           var="camionCodigoItem"
+                                           itemValue="#{camionCodigoItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{viajeController.create}" value="#{bundle.Save}" update="display,:ViajeListForm:datalist,:growl" oncomplete="handleSubmit(args,'ViajeCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ViajeCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

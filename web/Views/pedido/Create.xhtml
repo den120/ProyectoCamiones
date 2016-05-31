@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PedidoCreateDlg" widgetVar="PedidoCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreatePedidoTitle}">
+            <h:form id="PedidoCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{pedidoController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreatePedidoLabel_pedidoCodigo}" for="pedidoCodigo" />
+                        <p:inputText id="pedidoCodigo" value="#{pedidoController.selected.pedidoCodigo}" title="#{bundle.CreatePedidoTitle_pedidoCodigo}" required="true" requiredMessage="#{bundle.CreatePedidoRequiredMessage_pedidoCodigo}"/>
+                        <p:outputLabel value="#{bundle.CreatePedidoLabel_pedidoNumero}" for="pedidoNumero" />
+                        <p:inputText id="pedidoNumero" value="#{pedidoController.selected.pedidoNumero}" title="#{bundle.CreatePedidoTitle_pedidoNumero}" />
+                        <p:outputLabel value="#{bundle.CreatePedidoLabel_pedidoPeso}" for="pedidoPeso" />
+                        <p:inputText id="pedidoPeso" value="#{pedidoController.selected.pedidoPeso}" title="#{bundle.CreatePedidoTitle_pedidoPeso}" />
+                        <p:outputLabel value="#{bundle.CreatePedidoLabel_pedidoVolumen}" for="pedidoVolumen" />
+                        <p:inputText id="pedidoVolumen" value="#{pedidoController.selected.pedidoVolumen}" title="#{bundle.CreatePedidoTitle_pedidoVolumen}" />
+                        <p:outputLabel value="#{bundle.CreatePedidoLabel_pedidoEstado}" for="pedidoEstado" />
+                        <p:inputText id="pedidoEstado" value="#{pedidoController.selected.pedidoEstado}" title="#{bundle.CreatePedidoTitle_pedidoEstado}" />
+                        <p:outputLabel value="#{bundle.CreatePedidoLabel_pedidoFecharealizacion}" for="pedidoFecharealizacion" />
+                        <p:inputText id="pedidoFecharealizacion" value="#{pedidoController.selected.pedidoFecharealizacion}" title="#{bundle.CreatePedidoTitle_pedidoFecharealizacion}" />
+                        <p:outputLabel value="#{bundle.CreatePedidoLabel_pedidoFechaentregra}" for="pedidoFechaentregra" />
+                        <p:inputText id="pedidoFechaentregra" value="#{pedidoController.selected.pedidoFechaentregra}" title="#{bundle.CreatePedidoTitle_pedidoFechaentregra}" />
+                        <p:outputLabel value="#{bundle.CreatePedidoLabel_tiendaCodigo}" for="tiendaCodigo" />
+                        <p:selectOneMenu id="tiendaCodigo" value="#{pedidoController.selected.tiendaCodigo}" required="true" requiredMessage="#{bundle.EditPedidoRequiredMessage_tiendaCodigo}">
+                            <f:selectItems value="#{tiendaController.itemsAvailableSelectOne}"
+                                           var="tiendaCodigoItem"
+                                           itemValue="#{tiendaCodigoItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{pedidoController.create}" value="#{bundle.Save}" update="display,:PedidoListForm:datalist,:growl" oncomplete="handleSubmit(args,'PedidoCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PedidoCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

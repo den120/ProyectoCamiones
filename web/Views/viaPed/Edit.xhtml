@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ViaPedEditDlg" widgetVar="ViaPedEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditViaPedTitle}">
+            <h:form id="ViaPedEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{viaPedController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditViaPedLabel_viaPedCodigo}" for="viaPedCodigo" />
+                        <p:inputText id="viaPedCodigo" value="#{viaPedController.selected.viaPedCodigo}" title="#{bundle.EditViaPedTitle_viaPedCodigo}" required="true" requiredMessage="#{bundle.EditViaPedRequiredMessage_viaPedCodigo}"/>
+                        <p:outputLabel value="#{bundle.EditViaPedLabel_viaPedPesoaux}" for="viaPedPesoaux" />
+                        <p:inputText id="viaPedPesoaux" value="#{viaPedController.selected.viaPedPesoaux}" title="#{bundle.EditViaPedTitle_viaPedPesoaux}" />
+                        <p:outputLabel value="#{bundle.EditViaPedLabel_viaPedVolaux}" for="viaPedVolaux" />
+                        <p:inputText id="viaPedVolaux" value="#{viaPedController.selected.viaPedVolaux}" title="#{bundle.EditViaPedTitle_viaPedVolaux}" />
+                        <p:outputLabel value="#{bundle.EditViaPedLabel_viaPedAux}" for="viaPedAux" />
+                        <p:inputText id="viaPedAux" value="#{viaPedController.selected.viaPedAux}" title="#{bundle.EditViaPedTitle_viaPedAux}" />
+                        <p:outputLabel value="#{bundle.EditViaPedLabel_pedidoCodigo}" for="pedidoCodigo" />
+                        <p:selectOneMenu id="pedidoCodigo" value="#{viaPedController.selected.pedidoCodigo}" required="true" requiredMessage="#{bundle.EditViaPedRequiredMessage_pedidoCodigo}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{pedidoController.itemsAvailableSelectOne}"
+                                           var="pedidoCodigoItem"
+                                           itemValue="#{pedidoCodigoItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditViaPedLabel_viajeCodigo}" for="viajeCodigo" />
+                        <p:selectOneMenu id="viajeCodigo" value="#{viaPedController.selected.viajeCodigo}" required="true" requiredMessage="#{bundle.EditViaPedRequiredMessage_viajeCodigo}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{viajeController.itemsAvailableSelectOne}"
+                                           var="viajeCodigoItem"
+                                           itemValue="#{viajeCodigoItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{viaPedController.update}" value="#{bundle.Save}" update="display,:ViaPedListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ViaPedEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ViaPedEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

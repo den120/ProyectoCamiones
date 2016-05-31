@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListViaPedTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="ViaPedListForm">
+                <p:panel header="#{bundle.ListViaPedTitle}">
+                    <p:dataTable id="datalist" value="#{viaPedController.items}" var="item"
+                                 selectionMode="single" selection="#{viaPedController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.viaPedCodigo}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListViaPedTitle_viaPedCodigo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.viaPedCodigo}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListViaPedTitle_viaPedPesoaux}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.viaPedPesoaux}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListViaPedTitle_viaPedVolaux}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.viaPedVolaux}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListViaPedTitle_viaPedAux}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.viaPedAux}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListViaPedTitle_pedidoCodigo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.pedidoCodigo}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListViaPedTitle_viajeCodigo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.viajeCodigo}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{viaPedController.prepareCreate}" update=":ViaPedCreateForm" oncomplete="PF('ViaPedCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":ViaPedViewForm" oncomplete="PF('ViaPedViewDialog').show()" disabled="#{empty viaPedController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":ViaPedEditForm" oncomplete="PF('ViaPedEditDialog').show()" disabled="#{empty viaPedController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{viaPedController.destroy}" update=":growl,datalist" disabled="#{empty viaPedController.selected}"/>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CamionEditDlg" widgetVar="CamionEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditCamionTitle}">
+            <h:form id="CamionEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{camionController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditCamionLabel_camionCodigo}" for="camionCodigo" />
+                        <p:inputText id="camionCodigo" value="#{camionController.selected.camionCodigo}" title="#{bundle.EditCamionTitle_camionCodigo}" required="true" requiredMessage="#{bundle.EditCamionRequiredMessage_camionCodigo}"/>
+                        <p:outputLabel value="#{bundle.EditCamionLabel_camionMatricula}" for="camionMatricula" />
+                        <p:inputText id="camionMatricula" value="#{camionController.selected.camionMatricula}" title="#{bundle.EditCamionTitle_camionMatricula}" />
+                        <p:outputLabel value="#{bundle.EditCamionLabel_camionMaxvolumen}" for="camionMaxvolumen" />
+                        <p:inputText id="camionMaxvolumen" value="#{camionController.selected.camionMaxvolumen}" title="#{bundle.EditCamionTitle_camionMaxvolumen}" />
+                        <p:outputLabel value="#{bundle.EditCamionLabel_camionPesomax}" for="camionPesomax" />
+                        <p:inputText id="camionPesomax" value="#{camionController.selected.camionPesomax}" title="#{bundle.EditCamionTitle_camionPesomax}" />
+                        <p:outputLabel value="#{bundle.EditCamionLabel_camionDueno}" for="camionDueno" />
+                        <p:inputText id="camionDueno" value="#{camionController.selected.camionDueno}" title="#{bundle.EditCamionTitle_camionDueno}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{camionController.update}" value="#{bundle.Save}" update="display,:CamionListForm:datalist,:growl" oncomplete="handleSubmit(args, 'CamionEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="CamionEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

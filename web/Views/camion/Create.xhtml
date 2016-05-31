@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CamionCreateDlg" widgetVar="CamionCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateCamionTitle}">
+            <h:form id="CamionCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{camionController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateCamionLabel_camionCodigo}" for="camionCodigo" />
+                        <p:inputText id="camionCodigo" value="#{camionController.selected.camionCodigo}" title="#{bundle.CreateCamionTitle_camionCodigo}" required="true" requiredMessage="#{bundle.CreateCamionRequiredMessage_camionCodigo}"/>
+                        <p:outputLabel value="#{bundle.CreateCamionLabel_camionMatricula}" for="camionMatricula" />
+                        <p:inputText id="camionMatricula" value="#{camionController.selected.camionMatricula}" title="#{bundle.CreateCamionTitle_camionMatricula}" />
+                        <p:outputLabel value="#{bundle.CreateCamionLabel_camionMaxvolumen}" for="camionMaxvolumen" />
+                        <p:inputText id="camionMaxvolumen" value="#{camionController.selected.camionMaxvolumen}" title="#{bundle.CreateCamionTitle_camionMaxvolumen}" />
+                        <p:outputLabel value="#{bundle.CreateCamionLabel_camionPesomax}" for="camionPesomax" />
+                        <p:inputText id="camionPesomax" value="#{camionController.selected.camionPesomax}" title="#{bundle.CreateCamionTitle_camionPesomax}" />
+                        <p:outputLabel value="#{bundle.CreateCamionLabel_camionDueno}" for="camionDueno" />
+                        <p:inputText id="camionDueno" value="#{camionController.selected.camionDueno}" title="#{bundle.CreateCamionTitle_camionDueno}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{camionController.create}" value="#{bundle.Save}" update="display,:CamionListForm:datalist,:growl" oncomplete="handleSubmit(args,'CamionCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="CamionCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

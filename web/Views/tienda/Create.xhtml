@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TiendaCreateDlg" widgetVar="TiendaCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateTiendaTitle}">
+            <h:form id="TiendaCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{tiendaController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateTiendaLabel_tiendaCodigo}" for="tiendaCodigo" />
+                        <p:inputText id="tiendaCodigo" value="#{tiendaController.selected.tiendaCodigo}" title="#{bundle.CreateTiendaTitle_tiendaCodigo}" required="true" requiredMessage="#{bundle.CreateTiendaRequiredMessage_tiendaCodigo}"/>
+                        <p:outputLabel value="#{bundle.CreateTiendaLabel_tiendaNombre}" for="tiendaNombre" />
+                        <p:inputText id="tiendaNombre" value="#{tiendaController.selected.tiendaNombre}" title="#{bundle.CreateTiendaTitle_tiendaNombre}" />
+                        <p:outputLabel value="#{bundle.CreateTiendaLabel_tiendaDireccion}" for="tiendaDireccion" />
+                        <p:inputText id="tiendaDireccion" value="#{tiendaController.selected.tiendaDireccion}" title="#{bundle.CreateTiendaTitle_tiendaDireccion}" />
+                        <p:outputLabel value="#{bundle.CreateTiendaLabel_tiendaTelefono}" for="tiendaTelefono" />
+                        <p:inputText id="tiendaTelefono" value="#{tiendaController.selected.tiendaTelefono}" title="#{bundle.CreateTiendaTitle_tiendaTelefono}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{tiendaController.create}" value="#{bundle.Save}" update="display,:TiendaListForm:datalist,:growl" oncomplete="handleSubmit(args,'TiendaCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="TiendaCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

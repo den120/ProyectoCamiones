@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CamionViewDlg" widgetVar="CamionViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewCamionTitle}">
+            <h:form id="CamionViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{camionController.selected != null}">
+                        <h:outputText value="#{bundle.ViewCamionLabel_camionCodigo}"/>
+                        <h:outputText value="#{camionController.selected.camionCodigo}" title="#{bundle.ViewCamionTitle_camionCodigo}"/>
+                        <h:outputText value="#{bundle.ViewCamionLabel_camionMatricula}"/>
+                        <h:outputText value="#{camionController.selected.camionMatricula}" title="#{bundle.ViewCamionTitle_camionMatricula}"/>
+                        <h:outputText value="#{bundle.ViewCamionLabel_camionMaxvolumen}"/>
+                        <h:outputText value="#{camionController.selected.camionMaxvolumen}" title="#{bundle.ViewCamionTitle_camionMaxvolumen}"/>
+                        <h:outputText value="#{bundle.ViewCamionLabel_camionPesomax}"/>
+                        <h:outputText value="#{camionController.selected.camionPesomax}" title="#{bundle.ViewCamionTitle_camionPesomax}"/>
+                        <h:outputText value="#{bundle.ViewCamionLabel_camionDueno}"/>
+                        <h:outputText value="#{camionController.selected.camionDueno}" title="#{bundle.ViewCamionTitle_camionDueno}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="CamionViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
